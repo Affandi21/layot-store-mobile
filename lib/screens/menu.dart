@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:layot_store/widgets/left_drawer.dart';
+import 'package:layot_store/widgets/product_card.dart';
 
-class MyHomePage extends StatelessWidget  {
+class MyHomePage extends StatelessWidget {
   final String npm = '2306245075'; // NPM
   final String name = 'Affandi Shafwan Soleh'; // Nama
   final String className = 'PBP D'; // Kelas
   MyHomePage({super.key});
 
   final List<ItemHomepage> items = [
-         ItemHomepage("Lihat Daftar Produk", Icons.search),
-         ItemHomepage("Tambah Produk", Icons.add),
-         ItemHomepage("Logout", Icons.logout),
-     ];
+    ItemHomepage("Lihat Daftar Produk", Icons.search),
+    ItemHomepage("Tambah Produk", Icons.add),
+    ItemHomepage("Logout", Icons.logout),
+  ];
 
-  
   @override
   Widget build(BuildContext context) {
     // Scaffold menyediakan struktur dasar halaman dengan AppBar dan body.
@@ -27,9 +28,11 @@ class MyHomePage extends StatelessWidget  {
             fontWeight: FontWeight.bold,
           ),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
         // Warna latar belakang AppBar diambil dari skema warna tema aplikasi.
         backgroundColor: Color(0xFF0047AB),
       ),
+      drawer: const LeftDrawer(),
       // Body halaman dengan padding di sekelilingnya.
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -93,13 +96,11 @@ class MyHomePage extends StatelessWidget  {
   }
 }
 
-
-
 class InfoCard extends StatelessWidget {
   // Kartu informasi yang menampilkan title dan content.
 
-  final String title;  // Judul kartu.
-  final String content;  // Isi kartu.
+  final String title; // Judul kartu.
+  final String content; // Isi kartu.
 
   const InfoCard({super.key, required this.title, required this.content});
 
@@ -110,7 +111,8 @@ class InfoCard extends StatelessWidget {
       elevation: 2.0,
       child: Container(
         // Mengatur ukuran dan jarak di dalam kartu.
-        width: MediaQuery.of(context).size.width / 3.5, // menyesuaikan dengan lebar device yang digunakan.
+        width: MediaQuery.of(context).size.width /
+            3.5, // menyesuaikan dengan lebar device yang digunakan.
         padding: const EdgeInsets.all(16.0),
         // Menyusun title dan content secara vertikal.
         child: Column(
@@ -128,81 +130,3 @@ class InfoCard extends StatelessWidget {
   }
 }
 
-class ItemHomepage {
-     final String name;
-     final IconData icon;
-
-     ItemHomepage(this.name, this.icon);
- }
-
- class ItemCard extends StatelessWidget {
-  // Menampilkan kartu dengan ikon dan nama.
-
-  final ItemHomepage item; 
-  
-  const ItemCard(this.item, {super.key}); 
-
-  @override
-  Widget build(BuildContext context) {
-     Color backgroundColor;
-    switch (item.name) {
-      case "Logout":
-        backgroundColor = const Color.fromARGB(255, 193, 28, 16);
-        break;
-      case "Tambah Produk":
-        backgroundColor = const Color.fromARGB(255, 91, 183, 94);
-        break;
-      case "Lihat Daftar Produk":
-        backgroundColor = const Color.fromARGB(255, 195, 177, 21);
-        break;
-      default:
-        backgroundColor = Theme.of(context).colorScheme.secondary;
-    }
-
-    return Material(
-      // Menentukan warna latar belakang dari tema aplikasi.
-      color: backgroundColor,
-      // Membuat sudut kartu melengkung.
-      borderRadius: BorderRadius.circular(20),
-      
-      child: InkWell(
-        // Aksi ketika kartu ditekan.
-        onTap: () {
-          // Menampilkan pesan SnackBar saat kartu ditekan.
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
-            );
-        },
-        // Container untuk menyimpan Icon dan Text
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-          child: Center(
-            child: Column(
-              // Menyusun ikon dan teks di tengah kartu.
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 20.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white,
-                  fontSize: 14.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-  
-}

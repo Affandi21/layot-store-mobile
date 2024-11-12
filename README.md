@@ -248,5 +248,116 @@ class MyHomePage extends StatelessWidget  {
   ```
 
 
+## Tugas 8
+
+## Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+const digunakan untuk mendeklarasikan konstanta, yaitu nilai atau objek yang tidak berubah selama waktu eksekusi program. Menggunakan const dapat memberikan beberapa keuntungan, terutama dalam hal performa dan pengelolaan memori.
+
+Keuntungan const di Flutter:
+    Optimalisasi Performa: Objek yang dideklarasikan sebagai const diinisialisasi saat waktu kompilasi dan bukan pada waktu runtime, sehingga mengurangi overhead pada waktu eksekusi.
+
+    Penggunaan Memori yang Efisien: Flutter menggunakan objek const yang sama untuk setiap referensi, sehingga tidak perlu membuat instance baru setiap kali objek tersebut digunakan. Hal ini menghemat penggunaan memori.
+
+    Immutability: Menggunakan const menjadikan objek tidak dapat diubah, yang berarti lebih mudah untuk diprediksi dalam lingkungan yang memerlukan kepastian data dan menghindari efek samping.
+
+Kapan Menggunakan const:
+
+    Widget yang Tidak Berubah: Saat mendeklarasikan widget yang selalu memiliki konfigurasi yang sama dan tidak bergantung pada state atau data dinamis.
+    Konfigurasi atau Nilai Tetap: Untuk nilai yang tidak berubah seperti string konfigurasi, nilai warna, angka, dan lain-lain.
+
+Kapan Tidak Menggunakan const:
+
+    Widget yang Memerlukan State Dinamis: Jika widget perlu diperbarui berdasarkan state atau data yang berubah-ubah, menggunakan const tidak tepat karena const membuat nilai menjadi tetap.
+    Nilai yang Bergantung pada Waktu atau Kondisi Runtime: Jika nilai suatu variabel atau properti harus dihitung atau diambil berdasarkan kondisi yang ada saat runtime (misalnya, waktu saat ini atau hasil dari perhitungan dinamis).
 
 
+## Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+Di Flutter, Column dan Row adalah widget layout dasar yang membantu mengatur elemen-elemen secara vertikal dan horizontal. Keduanya sangat penting dalam membangun UI yang responsif dan terorganisir di Flutter. Berikut adalah penjelasan dan perbandingan antara kedua widget tersebut:
+Column
+    Penggunaan: Column digunakan untuk mengatur widget secara vertikal (dari atas ke bawah).
+    Flexibility: Widget dalam Column dapat memiliki flexibilitas yang berbeda menggunakan property flex dari widget Flexible atau Expanded.
+    Main Axis Alignment: Penjajaran utama pada sumbu vertikal, seperti start, end, center, spaceBetween, spaceAround, dan spaceEvenly.
+    Cross Axis Alignment: Penjajaran silang pada sumbu horizontal, seperti start, end, center, stretch, dan baseline.
+
+Row
+    Penggunaan: Row digunakan untuk mengatur widget secara horizontal (dari kiri ke kanan).
+    Flexibility: Sama seperti Column, widget dalam Row juga dapat mengatur flexibilitas menggunakan Flexible atau Expanded.
+    Main Axis Alignment: Penjajaran utama pada sumbu horizontal, dengan opsi yang sama seperti Column.
+    Cross Axis Alignment: Penjajaran silang pada sumbu vertikal, dengan opsi yang sama seperti Column.
+
+Perbandingan
+Column cocok untuk layout yang membutuhkan tumpukan vertikal seperti form atau list, sementara Row ideal untuk layout yang menyusun komponen secara sejajar seperti toolbar atau grup tombol.
+
+Contoh Column:
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Demo Column')),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text('Elemen pertama'),
+          Text('Elemen kedua'),
+          Text('Elemen ketiga'),
+        ],
+      ),
+    );
+  }
+}
+```
+
+Contoh Row
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Demo Row')),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Icon(Icons.share),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Share'),
+          ),
+          Icon(Icons.copy),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Copy'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+## Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+ya ada,
+- TextField digunakan untuk memasukkan tiga elemen, yaitu nama, jumlah, dan deskripsi.
+- SwitchListTile untuk mengaktifkan atau menonaktifkan fitur dengan tombol on/off
+- DropdownButton untuk memilih item dari daftar dropdown
+Slider untuk mengatur nilai intensitas dengan menggeser slider dalam rentang tertentu
+
+## Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+Ya, di file main.dart, digunakan tipe MaterialApp dengan colorScheme untuk memastikan keseragaman warna dalam aplikasi.
+
+## Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+Dengan cara menggunakan method push yaitu menambahkan route ke paling atas dengan menggunakan stack. Kemudian pop menghapus route yang paling atas dengan menggunakan stack
